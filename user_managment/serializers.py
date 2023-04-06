@@ -6,7 +6,7 @@ from admin_requirments.models import *
 import datetime
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 
-
+from django.core.exceptions import ObjectDoesNotExist
 class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
     @classmethod
     def get_token(cls, user):
@@ -14,9 +14,11 @@ class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
 
         # Add custom claims
         token['username'] = user.username
-        token['designation'] = user.designation.designation
-        token['profile_pic'] = user.profile_pic.url if user.profile_pic else ''
-        
+        try:
+            token['designation'] = user.designation.designation
+            token['profile_pic'] = user.profile_pic.url if user.profile_pic else ''
+        except:
+            ObjectDoesNotExist
         # ...
 
         return token

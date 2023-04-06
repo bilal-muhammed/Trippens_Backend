@@ -89,10 +89,10 @@ class MyAccountManager(BaseUserManager):
 
     
     def create_superuser(self, username,  password):
-        user = self.create_user(
+        user = self.create(
             # email      = self.normalize_email(email),
             username   = username,
-            password   = password,
+            # password   = password,
             
         )
         
@@ -100,6 +100,8 @@ class MyAccountManager(BaseUserManager):
         user.is_active  = True
         user.is_staff   = True
         user.is_superadmin  = True
+        user.set_password(password)
+
         user.save(using=self._db)
         return user
     
@@ -123,7 +125,7 @@ class UserStaff(AbstractBaseUser):
     last_logout     = models.DateTimeField(null=True)
     
     USERNAME_FIELD      = 'username'
-    REQUIRED_FIELDS     = ['email']
+    # REQUIRED_FIELDS     = ['email']
 
     objects = MyAccountManager()
 

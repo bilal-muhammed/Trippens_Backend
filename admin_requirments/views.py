@@ -12,9 +12,6 @@ class BrandViewSet(viewsets.ModelViewSet):
     serializer_class = BrandSerializer
 
 
-
-
-
 class BranchListAPIView(generics.ListCreateAPIView):
     queryset = Branches.objects.all()
     serializer_class = BranchSerializer    
@@ -87,7 +84,7 @@ class CustomInetenaryList(generics.ListAPIView):
 from rest_framework.decorators import api_view
 from datetime import datetime
 from rest_framework.response import Response
-#######################################################################################################
+#######################################################################################################################
 
 @api_view(['GET'])
 def Customer_counts(request):

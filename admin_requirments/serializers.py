@@ -17,18 +17,21 @@ class BranchSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
-class UpdateBranchSerializer(serializers.ModelSerializer):
-    brand = BrandSerializer()
-    class Meta:
-        model = Branches
-        fields = '__all__'
-
-
-
 class BranchCreateSerializer(serializers.ModelSerializer):
     class Meta:
         model = Branches
         fields = '__all__'
+
+
+
+class UpdateBranchSerializer(serializers.ModelSerializer):
+    brand = BrandSerializer(read_only=True)
+
+    class Meta:
+        model = Branches
+        fields = '__all__'
+
+
 
 class VehicleListSerializer(serializers.ModelSerializer):
     place = TrippensTourSerializer()
